@@ -1,0 +1,89 @@
+<style>
+.spinner {
+	position: absolute;
+	top: 50%;
+	left: 50%;
+	margin-left: -25px;
+	margin-top: -25px;
+}
+.spinner svg {
+	width: 50px;
+	height: 50px;
+	stroke: #dba634;
+	fill: #dba634;
+}
+.table_cart {
+	min-width: 100%;
+	display: block;
+}
+.table_cart thead {
+	background: #3CC;
+}
+.table_cart td, .table_cart th {
+	border: 1px solid #e2e2e2;
+	border-collapse: collapse;
+	padding: 5px;
+}
+</style>
+
+<ion-view title="Account">
+<ion-nav-buttons side="left">
+<button menu-toggle="left" class="button button-icon icon ion-navicon"></button>
+</ion-nav-buttons>
+<ion-content class="has-header padding">
+  <div ng-controller="ProfileCtrl">
+    <form id="getUser" data-ng-init="get_user()">
+      <input type="hidden" name="logged_email" ng-model="formData.logged_email" value="" />
+    </form>
+    
+    <ion-spinner icon="lines" class="spinner spinner-lines account_loader"></ion-spinner>  
+    
+    <div ng-repeat="user in details">
+      <div class="list profile_overview">
+        <div class="item item-icon-left"><i class="icon ion-person"></i> {{user.name}} </div>
+        <div class="item item-icon-left"> <i class="icon ion-email"></i> {{user.email}} </div>
+        <div class="item item-icon-left"> <i class="icon ion-android-call"></i> {{user.mobile}} </div>
+        <div class="item item-icon-left"> <i class="icon ion-android-pin"></i> {{user.address_1}} </div>
+        <div class="item item-icon-left"> <i class="icon ion-android-pin"></i> {{user.address_2}} </div>
+        <!--<div class="item item-icon-left"> <i class="icon ion-locked"></i> Change Password </div>-->
+        <button class="button button-full button-assertive open_update_form"> Edit Profile </button>
+      </div>
+      <form id="userUpdate" method="post" ng-submit="userUpdate()" style="display:none;">
+        <label class="item item-input item-stacked-label"> <span class="input-label">Name</span>
+          <input required="required" type="text" value="{{user.name}}" ng-model="formData.name_update">
+        </label>
+        <label class="item item-input item-stacked-label"> <span class="input-label">Email (Can't change)</span>
+          <input readonly="readonly" style="background:none;" type="email" value="{{user.email}}" ng-model="formData.email_update">
+        </label>
+        <label class="item item-input item-stacked-label"> <span class="input-label">Password</span>
+          <input required="required" type="password" value="{{user.password}}" ng-model="formData.pass_update">
+        </label>
+        <label class="item item-input item-stacked-label"> <span class="input-label">Mobile</span>
+          <input required="required" type="text" value="{{user.mobile_update}}" ng-model="formData.mobile_update">
+        </label>
+        <label class="item item-input item-stacked-label">
+        <span class="input-label">Address 1</span>
+        <textarea required="required" ng-model="formData.address1_update">{{user.address_1}}</textarea>
+        <div class="clearfix"></div>
+        </label>
+        <label class="item item-input item-stacked-label choose_address_1">
+         <a href="javascript:void(0);" class="ion-android-checkbox-outline energized address_1" style="float:right; font-size:24px; margin-right:15px;"></a> <span class="calm" style="float:right; margin:5px;"> Make it default</span>
+         <div class="clearfix"></div>
+        </label>
+        <label class="item item-input item-stacked-label">
+        <span class="input-label">Address 2</span>
+        <textarea required="required" ng-model="formData.address2_update">{{user.address_2}}</textarea>
+        <div class="clearfix"></div>
+        </label>
+        <label class="item item-input item-stacked-label choose_address_2">
+         <a href="javascript:void(0);" class="ion-android-checkbox-outline-blank energized address_2" style="float:right; font-size:24px; margin-right:15px;"></a> <span class="calm" style="float:right; margin:5px;"> Make it default</span>
+         <div class="clearfix"></div>
+        </label>
+        <div style="padding:10px;">
+          <button type="submit" class="button button-calm">Save & Update</button>
+          <a href="javascript:void(0);" class="close_form energized" style="padding:10px; display:inline-block;">Close</a> </div>
+      </form>
+    </div>
+  </div>
+</ion-content>
+</ion-view>

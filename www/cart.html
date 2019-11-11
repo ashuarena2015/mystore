@@ -1,0 +1,120 @@
+<style>
+
+.spinner{
+  position:absolute;
+  top:50%;
+  left:50%;
+  margin-left:-25px;
+  margin-top:-25px;	
+}
+
+.spinner svg {
+  width: 50px;
+  height: 50px;
+  stroke: #dba634;
+  fill: #dba634;
+}
+
+.table_cart{ min-width:100%; display:block;}
+.table_cart thead{background:#3CC;}
+.table_cart td,.table_cart th{border:1px solid #e2e2e2; border-collapse:collapse; padding:5px;}
+
+</style>
+
+
+
+
+<ion-view title="Cart"> 
+  <ion-nav-buttons side="left">
+    <button menu-toggle="left" class="button button-icon icon ion-navicon"></button>
+  </ion-nav-buttons>
+  <ion-content class="has-header padding">
+
+   <div ng-controller="CartCtrl"> 
+   
+   	<h4 ng-bind="noLoginCart" class="energized"></h4>
+   
+           <script type="text/ng-template" id="template/ngCart/cart.html"> 		
+		   
+		   	<h4 class="" style="color:#fff;" role="alert" ng-show="ngCart.getTotalItems() === 0">
+				Your cart is empty
+			</h4>
+		   		
+            <div class="list cart_list">
+                <a class="item item-thumbnail-left" href="#" ng-repeat="item in ngCart.getCart().items track by $index">				 
+				  <img src="http://ideaweaver.in/store-data/{{ item.getImg() }}">
+                  <span ng-init = "formData.pro_name = item.getName()"></span>
+				  <h2>{{ item.getName() }} <input type="hidden" ng-model="formData.pro_name" /></h2>
+                  <p>Price: {{ item.getPrice()}} <input type="hidden" value="{{ item.getPrice() }}" name="pro_price" /></p>
+                  <p>Total Price: {{ item.getTotal()}} <input type="hidden" value="{{ item.getTotal() }}" name="pro_total" /></p>
+				  <p>
+				    <span class="button button-small button-assertive" ng-class="{'disabled':item.getQuantity()==1}" ng-click="item.setQuantity(-1, true)"><i class="ion-ios-minus"></i></span>
+					 <span class="button button-small button-dark"><i>  {{ item.getQuantity() | number }} <input type="hidden" value="{{ item.getTotal() }}" name="pro_total" />  </i></span>
+					<span class="button button-small button-assertive" ng-click="item.setQuantity(1, true)"><i class="ion-ios-plus"></i></span>
+				  </p>
+				  <div ng-click="ngCart.removeItemById(item.getId())" class="ion-close-round"></div>
+                </a>
+            </div>
+			 
+			 <div class="cart_footer"  ng-show="ngCart.getTotalItems() > 0">
+				<div class="list" ng-show="ngCart.getTax()">
+				  <div class="item item-divider">
+					Tax ({{ ngCart.getTaxRate() }}%):
+				  </div>
+				  <a class="item" href="#">
+					<strong>{{ ngCart.getTax() | round:'':'up'}} <input type="hidden" value="{{ ngCart.getTax() | round:'':'up'}}" name="tax" /></strong>
+				  </a>
+				</div>
+				<div class="list" ng-show="ngCart.getShipping()">
+				  <div class="item item-divider">
+					Shipping:
+				  </div>
+				  <a class="item" href="#">
+					<strong>{{ ngCart.getShipping()}} <input type="hidden" value="{{ ngCart.getShipping()}}" name="shipping" /></strong>
+				  </a>
+				</div>
+				<div class="list last">
+				  <div class="item item-divider">
+					Total:
+				  </div>
+				  <a class="item" href="#">
+					<strong>{{ ngCart.totalCost() | round:'':'up'}} <input type="hidden" value="{{ ngCart.totalCost() | round:'':'up' }}" name="total"  /></strong>
+				  </a>
+				</div>
+			</div>	
+           </script> 
+
+          <ngcart-cart></ngcart-cart> 
+          
+         
+           <input type="hidden" ng-model="formData.logged_email" />
+   
+           <script type="text/ng-template" id="template/ngCart/addtocart.html">
+				  <div ng-hide="attrs.id">
+					<a class="btn btn-lg btn-primary" ng-disabled="true" ng-transclude></a>
+				
+				  </div>
+				  <div ng-show="attrs.id">
+					<div>
+					  <span ng-show="quantityMax">
+							<select style="padding:5px;" name="quantity" id="quantity" ng-model="q" ng-options=" v for v in qtyOpt"></select>
+					  </span>
+					  <a class="btn btn-sm btn-primary" ng-click="ngCart.addItem(id, name, price, q, data)" ng-transclude></a>
+					</div>
+					<mark ng-show="inCart()" class="add_cart_msg">
+					  This item is in your cart. <a ng-click="ngCart.removeItemById(id)" style="cursor: pointer;">Remove</a>
+					</mark>
+				  </div>
+			   </script>
+               <!-- <input type="submit" value="Place Order" class="button button-assertive" style="margin-bottom:15px; float:right;">   --> 
+             <!--   <pre> {{ summary |json}}</pre>          -->
+             
+			 <a class="button button-assertive checkout-btn" ng-click="confirm_order()">Confirm Order</a> 
+             <a class="button button-assertive placeorder-btn add_address" href="#/app/account" style="display:none;">Add Addresses</a>
+			 <a class="button button-assertive placeorder-btn sign_in_button" href="#/app/home" style="display:none;">Sign In</a>
+               
+   </div> 
+    
+    
+  </ion-content>
+</ion-view>

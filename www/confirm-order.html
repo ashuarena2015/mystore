@@ -1,0 +1,83 @@
+<style>
+
+.spinner{
+  position:absolute;
+  top:50%;
+  left:50%;
+  margin-left:-25px;
+  margin-top:-25px;	
+}
+
+.spinner svg {
+  width: 50px;
+  height: 50px;
+  stroke: #dba634;
+  fill: #dba634;
+}
+
+.table_cart{ min-width:100%; display:block;}
+.table_cart thead{background:#3CC;}
+.table_cart td,.table_cart th{border:1px solid #e2e2e2; border-collapse:collapse; padding:5px;}
+
+</style>
+
+
+
+
+<ion-view title="Cart"> 
+  <ion-nav-buttons side="left">
+    <button menu-toggle="left" class="button button-icon icon ion-navicon"></button>
+  </ion-nav-buttons>
+  <ion-content class="has-header padding">
+
+   <div ng-controller="ConfirmOrderCtrl"> 
+          
+                   <input type="hidden" ng-model="formData.logged_email" />
+                   
+          
+          <form id="orderUpdate" method="post" ng-submit="orderUpdate()">                
+                <label> 
+                   <h3 class="input-label">Order ID</h3>
+                   <h3 class="energized" ng-bind="showOrderID"></h3>
+                   <input type="hidden" value="{{user.order_id}}" ng-model="formData.orderID">
+                </label>   
+                <label> 
+                  <h3 class="input-label">Registered Email</h3>
+                  <h3 class="energized" ng-bind="formData.email_update"></h3>
+                  <input readonly="readonly" style="background:none;" type="hidden" value="{{user.email}}" ng-model="formData.email_update">
+                </label>
+                <label>
+                <h3 class="input-label">Address 1</h3>
+                <h3 class="energized" ng-bind="formData.address1_update"></h3>
+                <div class="clearfix"></div>
+                </label>
+                <label>
+                <h3 class="input-label">Address 2</h3>
+                <h3 class="energized" ng-bind="formData.address2_update"></h3>
+                <div class="clearfix"></div>
+                </label>
+                <label>
+                
+                
+                
+                 <h3 class="input-label">Billing Address</h3>
+                <ion-list>
+                   <ion-radio ng-repeat="item in addressList"
+                           ng-value="item.value"
+                           ng-model="formData.defaultAddress">
+                  {{ item.text }}
+                 </ion-radio>
+                </ion-list>
+                </label> 
+                 <label>
+                 <div style="padding:10px 0 20px;">
+                  <button type="submit" class="button button-assertive placeorder-btn">Place Order</button>
+                 </div>
+                </label>
+              </form>          
+               
+   </div> 
+    
+    
+  </ion-content>
+</ion-view>

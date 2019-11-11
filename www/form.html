@@ -1,0 +1,66 @@
+<ion-view title="{{ config.title }}">
+  <ion-nav-buttons side="left">
+  
+    <button menu-toggle="left" class="button button-icon icon ion-navicon" 
+            ng-hide="config.showSelect"></button>
+
+    <button class="button-clear button back-button" 
+            ng-click="toggleSelect()"
+            ng-show="config.showSelect"> <i class="icon ion-chevron-left"></i> </button>
+
+  </ion-nav-buttons>
+  <ion-content class="has-header">
+    <ion-list>
+    
+      <div class="item item-divider" ng-show="config.showSelect">
+        {{ config.desc }}
+      </div>
+
+      <form name="userForm"
+            ng-hide="config.showSelect"
+            novalidate>    
+      
+        <label class="item item-input item-stacked-label">
+          <span class="input-label">Name</span>
+          <input type="text" name="name"
+                 ng-model="user.name"
+                 placeholder="Your name ?" required>
+        </label>
+  
+        <ion-item class="item item-icon-right" ng-click="selectMusicGenre()">
+            Favorite music genre
+          <span class="item-note">
+          {{ user.favoriteGenre | resolveMusicGenreTile }}
+          </span>
+
+          <input type="hidden" name="favoriteGenre"
+                 ng-model="user.favoriteGenre" required>
+
+          <i class="icon ion-chevron-right icon-accessory"></i>
+        </ion-item>
+
+        <button class="button button-block button-positive"
+                ng-disabled="userForm.$invalid">
+          OK
+        </button>
+      </form>      
+
+      <ion-item ng-repeat="item in selectItems"
+                class="item item-icon-right"
+                ng-show="config.showSelect"
+                ng-click="chooseSelect(item.id)">
+                  {{ item.title }}
+                  <i class="icon ion-chevron-right icon-accessory"></i>
+      </ion-item>
+                
+    </ion-list>
+
+    <div class="list card" ng-hide="showSelect">
+      <div class="item">
+        User model: <pre> {{ user | json }}</pre>
+        Form model: <pre ng-bind="toJSON(userForm)"></pre>
+      </div>
+    </div>
+
+  </ion-content>
+</ion-view>

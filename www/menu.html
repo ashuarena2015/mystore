@@ -1,0 +1,25 @@
+<ion-side-menus>
+  <ion-pane ion-side-menu-content>
+    <ion-nav-bar class="bar-dark"></ion-nav-bar>
+     <a href="#/app/category" class="ion-navicon button button-small button-energized pull-right category_button"></a>
+     <a href="#/app/cart" class="ion-ios-cart button button-small button-assertive pull-right cart_button"></a>
+     <a href="#/app/account" class="ion-person button button-small button-calm pull-right account_button" style="display:none;"></a>
+     <a href="#/app/home" class="button button-small button-light pull-right small_logo_button"></a>
+    <ion-nav-view name="menuContent" animation="slide-left-right"></ion-nav-view>
+  </ion-pane>
+
+  <ion-side-menu side="left">
+    <header class="bar bar-header bar-dark">
+      <h1 class="slide-menu-title">Menu</h1>
+    </header>
+    <ion-content class="has-header">
+      <ion-list>
+        <ion-item nav-clear menu-close href="#/app/home" class="small_logo_button"><i class="ion-ios-home"></i> Sign In</ion-item>
+        <ion-item nav-clear menu-close href="#/app/category"><i class="ion-navicon"></i> Category</ion-item>
+        <ion-item nav-clear menu-close href="#/app/cart"><i class="ion-ios-cart"></i> Cart</ion-item>
+		<ion-item nav-clear menu-close href="#/app/my-orders" class="myorders_button" style="display:none;"><i class="ion-clipboard"></i> My Orders</ion-item>
+        <ion-item nav-clear menu-close href="#/app/logout" class="logout_button" style="display:none;"><i class="ion-log-out"></i> Logout</ion-item>
+      </ion-list>
+    </ion-content>
+  </ion-side-menu>
+</ion-side-menus>

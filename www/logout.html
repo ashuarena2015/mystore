@@ -1,0 +1,56 @@
+<style>
+
+.spinner{
+  position:absolute;
+  top:50%;
+  left:50%;
+  margin-left:-25px;
+  margin-top:-25px;	
+}
+
+.spinner svg {
+  width: 50px;
+  height: 50px;
+  stroke: #dba634;
+  fill: #dba634;
+}
+
+
+
+</style>
+
+
+<script>
+	function myFunction() {
+		alert("Page is loaded");
+	};
+</script>
+
+<ion-view title="My Store">
+  <ion-nav-buttons side="left">
+    <button menu-toggle="left" class="button button-icon icon ion-navicon"></button>
+  </ion-nav-buttons>
+  <ion-content class="has-header padding">
+    <div ng-controller="LogoutCtrl">   
+        <!--<ion-spinner icon="lines" class="spinner spinner-lines category_loader"></ion-spinner>    -->
+         
+         <div class="home_content">
+           <div class="row responsive-sm">
+             <div class="col">
+               <a href="#" class="main_logo"><img src="img/smp-logo-mark.png"  /></a>
+               <h3 class="logo_text">My Store</h3>
+             </div>
+           </div>
+         
+         </div>
+
+         <h3 class="energized" ng-bind="LogoutMsg" style="text-align:center;"></h3>
+        
+          </div>   
+        </div>
+         
+          
+    </div>
+    
+  </ion-content>
+</ion-view>
